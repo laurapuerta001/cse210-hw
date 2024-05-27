@@ -10,6 +10,9 @@ class Program
         int time = 0;
         int count = 0;
 
+        //11. Shows creativity and exceeds core requirements - Keeping a log of how many times activities were performed.
+        int timesPlayed = 0;
+
         List<string> reflectingPrompts = new List<string>();
 
         reflectingPrompts.Add("Think of a time when you stood up for someone else.");
@@ -45,8 +48,8 @@ class Program
                 BreathingActivity breathing = new BreathingActivity(name, description, time);
 
                 breathing.Run();
-               
-                
+
+                timesPlayed += 1;
                 
             }
             else if (choice == 2)
@@ -58,6 +61,8 @@ class Program
                 ReflectingActivity reflection = new ReflectingActivity(name, description, time, reflectingPrompts, questions);
                 
                 reflection.Run();
+
+                timesPlayed += 1;
                 
             }
             else if (choice == 3)
@@ -69,19 +74,25 @@ class Program
                 ListingActivity listing = new ListingActivity(name, description, time, listingPrompts, count);
 
                 listing.Run();
+
+                timesPlayed += 1;
                 
             }
             else
             {
-
+                break;
             }
         }
-        
+
+        Console.Clear();
+        Console.WriteLine($"You played {timesPlayed} activities.");
+        Console.WriteLine("Thank you for using the program. Goodbye!");
 
     }
 
     static int DisplayMenu()
     {
+        Console.Clear();
         Console.WriteLine("Menu Options: ");
 
         Console.WriteLine("1. Start breating activity");

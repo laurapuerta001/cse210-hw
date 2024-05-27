@@ -8,8 +8,23 @@ public class BreathingActivity : Activity
     public void Run()
     {
         DisplayStartMessage();
-        ShowSpinner(_duration);
-        ShowCountDown(_duration);
+        
+        DateTime startTime = DateTime.Now;
+        DateTime endTime = startTime.AddSeconds(_duration);
+
+        while (DateTime.Now < endTime) 
+        {
+            Console.WriteLine();
+            Console.Write("Breath in...");
+            ShowCountDown(5);
+            Console.WriteLine();
+
+            Console.Write("Breath out...");
+            ShowCountDown(5);
+            Console.WriteLine();
+        }
+        
         DisplayEndMessage();
     }
+
 }

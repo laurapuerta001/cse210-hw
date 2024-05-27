@@ -1,7 +1,6 @@
 public class Activity
 {
     protected string _name;
-
     protected string _description;
     protected int _duration;
 
@@ -21,44 +20,57 @@ public class Activity
         Console.Write("How long, in seconds, would you like for your session? ");
         _duration = int.Parse(Console.ReadLine());
 
+        Console.Clear();
+        Console.WriteLine("Get ready...");
+
+        ShowSpinner(6);
+        Console.WriteLine();
+
     }
 
     public void DisplayEndMessage()
     {
-        Console.Clear();
-        Console.WriteLine("Well Done!");
         Console.WriteLine();
+        Console.WriteLine("Well Done!");
+        ShowSpinner(6);
+        Console.WriteLine($"You have completed another {_duration} seconds of the {_name}.");
+        ShowSpinner(6);
     }
 
     public void ShowSpinner(int seconds)
     {
         string[] animation = new string[] {"|", "/", "-", "\\"};
+        
+        DateTime startTime = DateTime.Now;
+        DateTime endTime = startTime.AddSeconds(seconds);
 
-        _duration = seconds;
-
-        for (int i = 0; i < _duration; i++)
+        int i = 0;
+        while (DateTime.Now < endTime)
         {
-            foreach (string character in animation)
+            string c = animation[i];
+            Console.Write(c);
+            Thread.Sleep(500);
+            Console.Write("\b \b");
+
+            i++;
+
+            if (i >= animation.Count())
             {
-                Console.Write(character);
-                Thread.Sleep(_duration);
-                Console.Write("\b \b");
+                i = 0;
             }
+            
         }
+            
+
     }
 
     public void ShowCountDown(int seconds)
     {
-
-        _duration = seconds;
-
-        for (int i = _duration; i > 0; i--)
+        for (int i = seconds; i > 0; i--)
         {
             Console.Write(i);
-            Thread.Sleep(_duration);
-            Console.Write("\b \b");
+            Thread.Sleep(1000);
+            Console.Write("\b \b \b \b");
         }
-
-
     }
 }
