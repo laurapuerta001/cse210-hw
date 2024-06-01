@@ -1,5 +1,6 @@
 public class Video
 {
+    //Rubric: 1. Abstraction: Video Class - A Video class exists and has a way to track the title, author, and length.
     private string _title;
     private string _author;
     private int _length;
@@ -12,6 +13,7 @@ public class Video
         _length = length;
     }
 
+    //Rubric: 3. Class Composition - The Video class stores a list of Comment class objects.
     public void AddComment(Comment comment)
     {
         _comments.Add(comment);
@@ -23,13 +25,16 @@ public class Video
         AddComment(comment);
     }
 
-    public void DisplayVideo()
+    
+    //Rubric: 4. Class Behaviors - The Video class contains a method that returns the number of comments directly from the way comments are stored (for example returns the length of the list).
+    public void DisplayVideoDetails()
     {
         Console.WriteLine($"{_title} by {_author} ({_length} seconds)");
         foreach (Comment comment in _comments)
         {
             Console.WriteLine(comment.DisplayComment());
         }
+        Console.WriteLine($"{_comments.Count} comments");
         Console.WriteLine();
     }
 

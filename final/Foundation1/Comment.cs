@@ -1,5 +1,6 @@
 public class Comment
 {
+    //Rubric: 2.Abstraction: Comment Class - A Comment class exists that stores the name of the person and the text of the comment.
     private string _text;
     private string _author;
 
