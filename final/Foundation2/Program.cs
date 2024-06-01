@@ -4,7 +4,6 @@ class Program
 {
     static void Main(string[] args)
     {
-
         Product product1 = new Product("Milk", 3.99, 1, 2);
         Product product2 = new Product("Eggs", 1.99, 2, 1);
         Product product3 = new Product("Cheese", 5.99, 3, 5);

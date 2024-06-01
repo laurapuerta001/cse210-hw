@@ -27,6 +27,11 @@ public class Video
 
     
     //Rubric: 4. Class Behaviors - The Video class contains a method that returns the number of comments directly from the way comments are stored (for example returns the length of the list).
+    public int GetNumberOfComments()
+    {
+        return _comments.Count;
+    }
+    
     public void DisplayVideoDetails()
     {
         Console.WriteLine($"{_title} by {_author} ({_length} seconds)");
@@ -34,7 +39,7 @@ public class Video
         {
             Console.WriteLine(comment.DisplayComment());
         }
-        Console.WriteLine($"{_comments.Count} comments");
+        Console.WriteLine($"Number of comments: {GetNumberOfComments()}");
         Console.WriteLine();
     }
 
