@@ -25,8 +25,6 @@ public class Order
         {
             total += 33;
         }
-
-        
         return total;
     }
 

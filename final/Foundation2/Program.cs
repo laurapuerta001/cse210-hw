@@ -15,19 +15,17 @@ class Program
         Customer customer1 = new Customer("Kaleb Cote", address1);
         
         Order order1 = new Order(customer1, new List<Product> { product1, product2, product3 });
-        Console.WriteLine(order1.PackingLabel());
-        Console.WriteLine(order1.ShippingLabel());
-        Console.WriteLine(order1.CalculateTotal(customer1));
-        Console.WriteLine();
+        Console.WriteLine($"Total: ${order1.CalculateTotal(customer1)}");
+        Console.WriteLine($"Shipping Label: {order1.ShippingLabel()}");
+        Console.WriteLine($"Packing Label: \n{order1.PackingLabel()}");
 
         Address address2 = new Address("456 Main St", "Sao Paulo", "SP", "BR");
         Customer customer2 = new Customer("Laura Puerta", address2);
 
         Order order2 = new Order(customer2, new List<Product> { product4, product5 });
-        Console.WriteLine(order2.PackingLabel());
-        Console.WriteLine(order2.ShippingLabel());
-        Console.WriteLine(order2.CalculateTotal(customer2));
-
+        Console.WriteLine($"Total: ${order2.CalculateTotal(customer2)}");
+        Console.WriteLine($"Shipping Label: {order2.ShippingLabel()}");
+        Console.WriteLine($"Packing Label: \n{order2.PackingLabel()}");
 
     }
 }
