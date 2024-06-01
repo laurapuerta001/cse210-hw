@@ -1,12 +1,12 @@
 public class Order 
 {
     private List<Product> _products = new List<Product>();
-    private Customer _costumer;
+    private Customer _customer;
 
-    public Order(Customer costumer, List<Product> products)
+    public Order(Customer customer, List<Product> products)
     {
         _products = products;
-        _costumer = costumer;
+        _customer = customer;
     }
 
     public double CalculateTotal(Customer customer)
@@ -40,7 +40,7 @@ public class Order
 
     public string ShippingLabel()
     {
-        return _costumer.GetCustomerInfo();
+        return _customer.GetCustomerInfo();
     }
 
 }
