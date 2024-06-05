@@ -39,18 +39,18 @@ class Program
             if (e is OutdoorGathering)
             {
                 type = "Outdoor Gathering";
-                Console.WriteLine(e.GetShortDescription(type));
             }
             else if (e is Reception)
             {
                 type = "Reception";
-                Console.WriteLine(e.GetShortDescription(type));
             }
             else if (e is Lecture)
             {
                 type = "Lecture";
-                Console.WriteLine(e.GetShortDescription(type));
+                
             }
+            Console.WriteLine(e.GetShortDescription(type));
+            
             Console.WriteLine();
             Console.WriteLine("-------------------------");
             Console.WriteLine();
