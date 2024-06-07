@@ -32,7 +32,7 @@ public class ChecklistGoal : Goal
 
     public override string GetStringRepresentation()
     {
-        return $"Checklist Goal - {_shortName} - {_description} - {_points} - {_bonus} - {_target} - {_amountCompleted}";
+        return $"Checklist Goal-{_shortName}-{_description}-{_points}-{_bonus}-{_target}-{_amountCompleted}";
     }
 
     public override string GetDetailsString()
@@ -42,6 +42,11 @@ public class ChecklistGoal : Goal
             mark = "[X]";
         }
         return $"{mark} {_shortName} ({_description}) -- Current Progress: {_amountCompleted}/{_target}";
+    }
+
+    public void SetAmountCompleted(int amountCompleted)
+    {
+        _amountCompleted = amountCompleted;
     }
 
 }

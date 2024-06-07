@@ -15,7 +15,7 @@ public class GoalManager
     {
         int choice = 0;
 
-        while (choice != 6)
+        while (choice != 7)
         {
             DisplayPlayerInfo();
 
@@ -25,7 +25,8 @@ public class GoalManager
             Console.WriteLine(" 3. Save Goals");
             Console.WriteLine(" 4. Load Event");
             Console.WriteLine(" 5. Record Event");
-            Console.WriteLine(" 6. Quit");
+            Console.WriteLine(" 6. Rewards");
+            Console.WriteLine(" 7. Quit");
             Console.Write("Select a choice from the menu: ");
             choice = int.Parse(Console.ReadLine());
 
@@ -51,6 +52,10 @@ public class GoalManager
             }
             else if (choice == 6)   
             {
+                GetReward();
+            }
+            else if (choice == 7)
+            {
                 break;
             }
             else {
@@ -62,9 +67,43 @@ public class GoalManager
         
     }
 
+    //12. Shows creativity and exceeds core requirements
+    public void GetReward()
+    {
+        List<Reward> rewards = new List<Reward>(); 
+        rewards.Add(new Reward("Chocolate", 5));
+        rewards.Add(new Reward("Candy", 10));
+        rewards.Add(new Reward("Cupcake", 15));
+        rewards.Add(new Reward("Treat", 20));
+        rewards.Add(new Reward("Candy bar", 25));
+
+        Console.WriteLine("Rewards: ");
+        int id = 1;
+        foreach (Reward reward in rewards)
+        {
+            Console.WriteLine($"{id}. {reward.GetName()} - {reward.GetPoints()} points");
+            id += 1;
+        }
+
+        Console.WriteLine("Which reward would you like to earn? ");
+        int rewardId = int.Parse(Console.ReadLine());
+        int points = rewards[rewardId - 1].GetPoints();
+        if (_score >= points)
+        {
+            _score -= points;
+            Console.WriteLine($"Congratulations! You have earned {rewards[rewardId - 1].GetName()}!");
+            Console.WriteLine($"You now have {_score} points.");
+        }
+        else
+        {
+            Console.WriteLine("You do not have enough points to earn this reward.");
+        }
+        
+    }
+
     public void DisplayPlayerInfo()
     {
-        Console.WriteLine($"Your have {_score} points.");
+        Console.WriteLine($"You have {_score} points.");
 
     }
 
@@ -149,7 +188,7 @@ public class GoalManager
             _score += _goals[goalId].GetPoints();
             if (_goals[goalId].IsComplete())
             {
-                _score += int.Parse(_goals[goalId].GetStringRepresentation().Split(" - ")[4]);
+                _score += int.Parse(_goals[goalId].GetStringRepresentation().Split("-")[4]);
             }
         }   
         else
@@ -197,7 +236,7 @@ public class GoalManager
                 string goalDescription = parts[2];
                 string goalPoints = parts[3];
 
-                if (goalType == "SimpleGoal")
+                if (goalType == "Simple Goal")
                 {
                     _goals.Add(new SimpleGoal(goalName, goalDescription, int.Parse(goalPoints)));
                     string status = parts[4];
@@ -207,21 +246,24 @@ public class GoalManager
                         _goals[_goals.Count - 1].RecordEvent();
                     }
                 }
-                else if (goalType == "EternalGoal")
+                else if (goalType == "Eternal Goal")
                 {
                     _goals.Add(new EternalGoal(goalName, goalDescription, int.Parse(goalPoints)));
                 }
-                else if (goalType == "ChecklistGoal")
+                else if (goalType == "Checklist Goal")
                 {
                     int goalBonus = int.Parse(parts[4]);
                     int goalTarget = int.Parse(parts[5]);
                     int goalTimes = int.Parse(parts[6]);
 
                     _goals.Add(new ChecklistGoal(goalName, goalDescription, int.Parse(goalPoints), goalTarget, goalBonus));
-    
+                    
                     if (goalTimes > 0)
                     {
-                        _goals[_goals.Count - 1].RecordEvent();
+                        if (_goals[_goals.Count - 1] is ChecklistGoal derivedGoal)
+                        {
+                            derivedGoal.SetAmountCompleted(goalTimes);
+                        }
                     }
 
                 }
@@ -229,6 +271,7 @@ public class GoalManager
             
             
         }
+        Console.Clear();
 
     }
 }
